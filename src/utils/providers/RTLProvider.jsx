@@ -1,10 +1,10 @@
-// src/components/rtl-provider.js
-
 import {CacheProvider} from '@emotion/react'
 import createCache from '@emotion/cache'
 import rtl from 'stylis-plugin-rtl'
+import {getSelectedLanguage} from "../helpers/language";
+import strings from "../localization/main";
 
-// NB: A unique `key` is important for it to work!
+
 const options = {
   rtl: {
     key: 'css-he', stylisPlugins: [rtl],
@@ -14,9 +14,14 @@ const options = {
   }
 }
 
-// eslint-disable-next-line react/prop-types
+const supportedLanguages = {
+  en: "ltr",
+  he: "rtl"
+}
+
 export function RtlProvider({children}) {
-  const dir = 'ltr'
+  const dir = supportedLanguages[getSelectedLanguage()];
+  strings.setLanguage(getSelectedLanguage());
   const cache = createCache(options[dir])
   return (
     <CacheProvider value={cache}>

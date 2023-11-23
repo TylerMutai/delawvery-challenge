@@ -4,7 +4,7 @@ import he from "./he";
 
 const strings = new LocalizedStrings({
   en: en,
-  // he: he
+  he: he
 });
 
 export default strings;

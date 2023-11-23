@@ -1,4 +1,6 @@
 const en = {
+  english: "English",
+  hebrew:"Hebrew",
   login: "Login",
   home: "Home",
   files: "Files",
