@@ -28,7 +28,7 @@ function FilesListPage() {
 
   return (
     isLoading ? <FullPageLoader/> :
-      <Flex w={"100%"} h={"100vh"} flexDirection={"column"}
+      <Flex w={"100%"} h={"100%"} flexDirection={"column"}
             justifyContent={"start"} alignItems={"start"} px={"30px"} py={"30px"}>
         {files.length === 0 ? <>
           <Text mb={"15px"}>{strings.no_files_found}</Text>

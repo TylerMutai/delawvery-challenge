@@ -23,7 +23,7 @@ function LogoutPage() {
     handleSubmit().then();
   }, [handleSubmit])
   return (
-    <Flex h={"100vh"} w={"100%"} alignItems={"center"} justifyContent={"center"}>
+    <Flex h={"100%"} w={"100%"} alignItems={"center"} justifyContent={"center"}>
       {isLoading ? <CircularProgress isIndeterminate={true}/> :
         <Text>{strings.error_occurred_refresh_page}</Text>
       }

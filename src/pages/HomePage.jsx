@@ -10,7 +10,7 @@ function HomePage() {
   }, [navigate])
 
   return (
-    <Flex w={"100%"} h={"100vh"} flexDirection={"column"}
+    <Flex w={"100%"} h={"100%"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}
           paddingX={"5rem"}>
       <Spinner size='xl'/>

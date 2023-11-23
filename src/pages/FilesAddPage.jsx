@@ -119,7 +119,7 @@ function FilesAddPage() {
   }, [handleSubmit, file, filePages]);
 
   return (
-    <Flex w={"100%"} h={"100vh"} flexDirection={"column"}
+    <Flex w={"100%"} h={"100%"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}>
       {processingFile ?
         <Flex w={"100%"} h={"100%"} gap={"30px"} alignItems={"center"} justifyContent={"center"}
