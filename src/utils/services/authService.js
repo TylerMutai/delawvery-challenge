@@ -67,7 +67,7 @@ const signOut = async () => {
     Swal.fire({
       icon: "success",
       title: strings.success,
-      text: strings.user_login_successful,
+      text: strings.user_logout_successful,
     }).then();
     return true;
   } catch (e) {

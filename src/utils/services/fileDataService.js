@@ -2,11 +2,14 @@ import {app} from "../helpers/firebase";
 import strings from "../localization/main";
 import Swal from "sweetalert2";
 import {parseErrorResponse} from "../helpers/errorHandling";
-import {getFirestore} from "firebase/firestore";
-import {getStorage} from "firebase/storage";
+import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {getAnalytics, logEvent} from "firebase/analytics";
+
 
 const firestore = getFirestore(app);
 const storage = getStorage(app);
+const analytics = getAnalytics(app);
 
 const entityName = "userFiles";
 
@@ -20,22 +23,23 @@ const createFileData = async (filePages, file) => {
 
   // File upload
   try {
-    const storageRef = storage.ref();
     const fileName = `${new Date().getTime()}-${file.name}`;
-    storageRef.child(fileName);
-    await storageRef.put(file);
+    const storageRef = ref(storage, fileName);
+    await uploadBytes(storageRef, file);
     const data = {
       filePages: filePages,
-      fileUrl: await storageRef.getDownloadURL()
+      fileName: file.name,
+      fileUrl: await getDownloadURL(storageRef)
     };
 
     try {
-      const docRef = await firestore.collection(entityName).add(data);
+      const docRef = await addDoc(collection(firestore, entityName), data);
       Swal.fire({
         icon: "success",
         title: strings.success,
         text: strings.file_uploaded_success
       }).then();
+      logEvent(analytics, "file-uploaded-successfully");
       return {...data, id: docRef.id};
     } catch (e) {
       Swal.fire({
@@ -59,7 +63,7 @@ const createFileData = async (filePages, file) => {
  */
 const listFileData = async () => {
   try {
-    const docs = await firestore.collection(entityName).get();
+    const docs = await getDocs(collection(firestore, entityName))
     const data = [];
     docs.forEach(doc => {
       data.push({

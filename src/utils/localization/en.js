@@ -1,5 +1,7 @@
 const en = {
   login: "Login",
+  home: "Home",
+  files: "Files",
   register: "Register",
   logout: "Logout",
   logging_out: "Logging out",
@@ -11,6 +13,7 @@ const en = {
   success: "Success",
   user_registered_successfully: "User registered successfully",
   user_login_successful: "User logged in successfully",
+  user_logout_successful: "User logged out successfully",
   file_uploaded_success: "File uploaded successfully",
   file_deleted_success: "File deleted successfully",
   file_not_found: "File could not be found",
@@ -18,8 +21,20 @@ const en = {
   error_occurred_refresh_page: "An error occurred. Please refresh this page",
   select_language: "Select language",
   passwords_dont_match: "Password dont match",
+  upload_a_file_and_set_pages: "Make sure you have selected a file. If the number of pages wasn't inferred automatically, please insert the number of pages.",
+  upload_file: "Upload File",
+  file: "File",
+  number_of_pages: "Number of pages",
+  processing_file: "Processing file",
+  information: "Information",
+  please_specify_number_of_pages: "Please specify the number of pages",
+  pages_approximated_for_word_doc: "Please not that number of pages are an approximation in word documents. Be sure to adjust accordingly.",
+  could_not_read_file: "The file uploaded could not be parsed. Try another file.",
+  download_file: "Download file",
+  no_files_found: "No files were found",
   "auth/configuration-not-found": "Authentication configuration has not been set for this app. Contact support",
   "auth/invalid-login-credentials": "Username or password provided was wrong. Please try again.",
+  "permission-denied": "You are not allowed to access this page. Login first."
 
 }
 export default en;

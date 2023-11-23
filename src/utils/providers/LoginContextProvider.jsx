@@ -4,7 +4,7 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../services/authService";
 import {useLocation, useNavigate} from "react-router-dom";
 import frontendPaths from "../values/frontendPaths";
-import {Flex, Spinner} from "@chakra-ui/react";
+import FullPageLoader from "../../components/FullPageLoader";
 
 const protectedRoutes = [
   frontendPaths.files,
@@ -40,11 +40,7 @@ function LoginContextProvider({children}) {
     }}>
       {
         loading ?
-          <Flex w={"100%"} h={"100vh"} flexDirection={"column"}
-                justifyContent={"center"} alignItems={"center"}
-                paddingX={"5rem"}>
-            <Spinner size='xl'/>
-          </Flex> :
+          <FullPageLoader/> :
           children
       }
     </LoginContext.Provider>

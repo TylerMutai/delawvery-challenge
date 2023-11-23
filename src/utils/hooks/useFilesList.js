@@ -1,27 +1,25 @@
 import {useCallback, useEffect, useState} from 'react';
-import {getUsers} from "../services/userService.js";
 import useNetworkRequest from "./useNetworkRequest.js";
+import {listFileData} from "../services/fileDataService";
 
 /**
  *
- * @return {JSX.Element}
+ * @return {({}|(function(null=): Promise<void>)|*|(function(): void)|*[])[]}
  */
 function useFilesList() {
-  const [artists, setArtists] = useState([]);
-  const handleGetArtists = useCallback(() => getUsers({role: "artist"}), []);
-  const [isLoading, res, handleSubmit] = useNetworkRequest(handleGetArtists)
+  const [files, setFiles] = useState([]);
+  const handleListFiles = useCallback(() => listFileData(), []);
+
+  const handleSuccess = useCallback((data) => {
+    setFiles(data);
+  }, [])
+  const [isLoading, handleSubmit] = useNetworkRequest(handleListFiles, handleSuccess)
 
   useEffect(() => {
-    if (res.data) {
-      setArtists(res.data);
-    }
-  }, [res])
-
-  useEffect(() => {
-    handleSubmit();
+    handleSubmit().then();
   }, [handleSubmit])
 
-  return [isLoading, artists, res];
+  return [isLoading, files];
 }
 
 export default useFilesList;

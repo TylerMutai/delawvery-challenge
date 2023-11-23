@@ -10,9 +10,9 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import frontendPaths from "./utils/values/frontendPaths";
-import FilesListPage from "./pages/FilesAddPage";
 import FilesAddPage from "./pages/FilesAddPage";
 import LogoutPage from "./pages/LogoutPage";
+import FilesListPage from "./pages/FilesListPage";
 
 function App() {
   return (

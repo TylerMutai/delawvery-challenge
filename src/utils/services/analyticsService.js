@@ -9,7 +9,7 @@ const analytics = getAnalytics(app);
  * @returns {Promise<void|User>}
  */
 const logToAnalytics = async (message) => {
-  logEvent(analytics, message);
+
 }
 
 export {logToAnalytics};
