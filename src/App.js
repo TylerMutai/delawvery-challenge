@@ -12,6 +12,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import frontendPaths from "./utils/values/frontendPaths";
 import FilesListPage from "./pages/FilesAddPage";
 import FilesAddPage from "./pages/FilesAddPage";
+import LogoutPage from "./pages/LogoutPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <Routes>
                   <Route path={frontendPaths.index} element={<HomePage/>}/>
                   <Route path={frontendPaths.login} element={<LoginPage/>}/>
+                  <Route path={frontendPaths.logout} element={<LogoutPage/>}/>
                   <Route path={frontendPaths.registration} element={<RegistrationPage/>}/>
                   <Route path={frontendPaths.files} element={<FilesListPage/>}/>
                   <Route path={frontendPaths.add_file} element={<FilesAddPage/>}/>

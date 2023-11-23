@@ -20,7 +20,7 @@ function LogoutPage() {
   const [isLoading, handleSubmit] = useNetworkRequest(handleLogout, handleSuccess);
 
   useEffect(() => {
-    handleSubmit();
+    handleSubmit().then();
   }, [handleSubmit])
   return (
     <Flex h={"100vh"} w={"100%"} alignItems={"center"} justifyContent={"center"}>

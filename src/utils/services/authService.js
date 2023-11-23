@@ -59,7 +59,7 @@ const signIn = async (user) => {
 
 /**
  *
- * @returns {Promise<void>}
+ * @returns {Promise<void|boolean>}
  */
 const signOut = async () => {
   try {
@@ -69,6 +69,7 @@ const signOut = async () => {
       title: strings.success,
       text: strings.user_login_successful,
     }).then();
+    return true;
   } catch (e) {
     Swal.fire({
       type: "error",
