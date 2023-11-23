@@ -4,8 +4,8 @@ import strings from "../utils/localization/main";
 import {getSelectedLanguage, setLanguage} from "../utils/helpers/language";
 
 const languages = {
-  en: strings.english,
-  he: strings.hebrew
+  en: "English",
+  he: "עברית"
 }
 
 function LanguageSwitch() {
