@@ -13,21 +13,12 @@ export const auth = getAuth(app);
 
 /**
  *
- * @returns {Promise<void|User>}
- */
-const getSignedInUser = async () => {
-  return auth.currentUser;
-}
-
-/**
- *
  * @param {import("../types/user/user.js").User} user
  * @returns {Promise<void|User>}
  */
 const signUp = async (user) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password);
-    console.log(userCredential);
     Swal.fire({
       icon: "success",
       title: strings.success,
@@ -87,4 +78,4 @@ const signOut = async () => {
   }
 }
 
-export {signIn, signUp, signOut, getSignedInUser};
+export {signIn, signUp, signOut};

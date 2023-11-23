@@ -16,7 +16,7 @@ function useNetworkRequest(action, onSuccessCallback = null, onErrorCallback = n
     setIsLoading(true);
     const res = await action(data);
     setRes(res);
-    if (res?.StatusCode === 0) {
+    if (res) {
       if (onSuccessCallback) {
         onSuccessCallback(res, data);
       }

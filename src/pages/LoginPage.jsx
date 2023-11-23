@@ -1,7 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {
   Button,
-  Card,
   CardBody,
   CardFooter,
   CardHeader,
@@ -18,6 +17,7 @@ import useNetworkRequest from "../utils/hooks/useNetworkRequest";
 import {signIn} from "../utils/services/authService";
 import {useNavigate} from "react-router-dom";
 import frontendPaths from "../utils/values/frontendPaths";
+import CustomCard from "../components/CustomCard";
 
 function LoginPage() {
   const [user, setUser] = useState({});
@@ -40,11 +40,7 @@ function LoginPage() {
   return (
     <Flex w={"100%"} h={"100vh"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}>
-      <Card w={{
-        base: "100%",
-        md: "70%",
-        lg: "50%"
-      }}>
+      <CustomCard>
         <CardHeader>
           <Heading size='md'>{strings.login}</Heading>
         </CardHeader>
@@ -66,7 +62,7 @@ function LoginPage() {
             {strings.login}
           </Button>
         </CardFooter>
-      </Card>
+      </CustomCard>
     </Flex>
   );
 }

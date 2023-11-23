@@ -17,6 +17,7 @@ const en = {
   wont_share_email: "We'll never share your email.",
   error_occurred_refresh_page: "An error occurred. Please refresh this page",
   select_language: "Select language",
+  passwords_dont_match: "Password dont match",
   "auth/configuration-not-found": "Authentication configuration has not been set for this app. Contact support",
   "auth/invalid-login-credentials": "Username or password provided was wrong. Please try again.",
 

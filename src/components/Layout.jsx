@@ -9,7 +9,6 @@ import Footer from "./Footer";
  * @constructor
  */
 function Layout(props) {
-
   return (
     <Flex flexDirection={"column"} minH={"100vh"} w={"100%"}>
       <NavBar/>
