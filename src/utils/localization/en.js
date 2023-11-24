@@ -1,7 +1,7 @@
 const en = {
   internal_error: "Internal error",
   english: "English",
-  hebrew:"Hebrew",
+  hebrew: "Hebrew",
   login: "Login",
   home: "Home",
   files: "Files",
@@ -35,6 +35,7 @@ const en = {
   could_not_read_file: "The file uploaded could not be parsed. Try another file.",
   download_file: "Download file",
   no_files_found: "No files were found",
+  pages: "page(s)",
   "auth/configuration-not-found": "Authentication configuration has not been set for this app. Contact support",
   "auth/invalid-login-credentials": "Username or password provided was wrong. Please try again.",
   "permission-denied": "You are not allowed to access this page. You do not have necessary permissions."

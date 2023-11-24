@@ -35,7 +35,17 @@ const fontSizeLarge = "18px";
 const fontSizeExtraLarge = "22px";
 
 const fontSizeExtraExtraLarge = "28px";
+
+const fontSizeExtraExtraExtraLarge = "38px";
 const transition = "all ease-in-out .3s"
 
 export default theme;
-export {backgroundColor, fontSizeNormal, fontSizeLarge, fontSizeExtraLarge, fontSizeExtraExtraLarge, transition};
+export {
+  backgroundColor,
+  fontSizeNormal,
+  fontSizeLarge,
+  fontSizeExtraLarge,
+  fontSizeExtraExtraLarge,
+  fontSizeExtraExtraExtraLarge,
+  transition
+};

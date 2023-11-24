@@ -35,6 +35,7 @@ const he = {
   could_not_read_file: "לא ניתן לקרוא את הקובץ שהועלה. נסה קובץ אחר",
   download_file: "הורד קובץ",
   no_files_found: "לא נמצאו קבצים",
+  pages: "עמודים",
   "auth/configuration-not-found": "לא נמצאה הגדרת אימות לאפליקציה זו. צור קשר עם התמיכה",
   "auth/invalid-login-credentials": "שם משתמש או סיסמה שסופקו אינם נכונים. נסה שוב",
   "permission-denied": "אין לך הרשאה לגשת לעמוד זה. התחבר תחילה"

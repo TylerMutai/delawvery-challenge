@@ -5,16 +5,14 @@ import useNetworkRequest from "../utils/hooks/useNetworkRequest";
 import {
   Button,
   CardBody,
-  CardFooter,
-  CardHeader,
   Flex,
   FormControl,
   FormLabel,
   Heading,
+  Icon,
   Input,
   Spinner,
   Stack,
-  StackDivider,
   Text
 } from "@chakra-ui/react";
 import CustomCard from "../components/CustomCard";
@@ -25,15 +23,14 @@ import * as pdfjsLib from "pdfjs-dist";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import useLoggedInUser from "../utils/hooks/useLoggedInUser";
+import CustomCardHeader from "../components/CustomCardHeader";
+import CustomCardFooter from "../components/CustomCardFooter";
+import {IoCloudUploadOutline} from "react-icons/io5";
+import {getExtension, getFileIcon, supportedExtensions} from "../utils/types/file";
+import {FaRegTrashAlt} from "react-icons/fa";
 
 // set up fake worker for the browser.
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
-
-const supportedExtensions = [
-  "pdf",
-  "docx",
-  "doc"
-]
 
 function FilesAddPage() {
   const [file, setFile] = useState();
@@ -46,7 +43,7 @@ function FilesAddPage() {
     const file = e.target.files[0];
     if (!file) return;
     setProcessingFile(true);
-    const extension = file.name.split('.').pop();
+    const extension = getExtension(file.name);
     if (supportedExtensions.includes(extension)) {
       try {
         const buffer = await file.arrayBuffer();
@@ -89,7 +86,7 @@ function FilesAddPage() {
     }
     setFile(file);
     setProcessingFile(false);
-  }, [])
+  }, [getExtension])
 
   const handlePagesChange = useCallback(e => {
     const val = parseInt(e.target.value);
@@ -120,6 +117,10 @@ function FilesAddPage() {
     handleSubmit().then();
   }, [handleSubmit, file, filePages]);
 
+  const handleRemove = useCallback(() => {
+    setFile(null);
+  }, [])
+
   return (
     <Flex w={"100%"} minH={"100vh"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}>
@@ -134,13 +135,17 @@ function FilesAddPage() {
           </Text>
         </Flex> : null}
       <CustomCard>
-        <CardHeader>
+        <CustomCardHeader>
+          <Icon as={IoCloudUploadOutline}/>
           <Heading size='md'>{strings.upload_file}</Heading>
-        </CardHeader>
+        </CustomCardHeader>
         <CardBody>
-          <Stack divider={<StackDivider/>} spacing='4'>
+          <Stack spacing='6'>
             <FormControl>
-              <FormLabel>{strings.file}</FormLabel>
+              {file?.name ? getFileIcon(getExtension(file.name)) : null}
+              <FormLabel ml={"5px"}>{file?.name ?
+                <Icon onClick={handleRemove} cursor={"pointer"} as={FaRegTrashAlt} color={"red"} mr={"6px"}/> : null}
+                {file?.name ? file.name : strings.file}</FormLabel>
               <Input type='file' name={"file"} onChange={handleFileChange} isRequired={true}/>
             </FormControl>
             <FormControl>
@@ -151,11 +156,11 @@ function FilesAddPage() {
             </FormControl>
           </Stack>
         </CardBody>
-        <CardFooter>
-          <Button colorScheme={"blue"} isLoading={isLoading} onClick={_handleSubmit}>
+        <CustomCardFooter>
+          <Button isLoading={isLoading} onClick={_handleSubmit}>
             {strings.upload_file}
           </Button>
-        </CardFooter>
+        </CustomCardFooter>
       </CustomCard>
     </Flex>
   );

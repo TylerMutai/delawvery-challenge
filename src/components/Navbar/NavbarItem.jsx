@@ -42,7 +42,8 @@ function NavbarItem({to, children}) {
     gap: "8px",
     fontSize: fontSizeNormal,
     _hover: {
-      fontSize: fontSizeLarge
+      fontSize: fontSizeLarge,
+      color: "black"
     }
   }
   const indicatorStyles = {

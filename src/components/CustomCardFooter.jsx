@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {backgroundColor} from "../utils/values/theme";
 import {CardFooter} from "@chakra-ui/react";
 
-function CustomCardHeader({children}) {
+function CustomCardFooter({children}) {
   return (
     <CardFooter borderTop={`4px solid ${backgroundColor}`}
                 display={"flex"} alignItems={"center"} gap={"14px"}>
@@ -12,8 +12,8 @@ function CustomCardHeader({children}) {
   );
 }
 
-CustomCardHeader.propTypes = {
+CustomCardFooter.propTypes = {
   children: PropTypes.element
 }
 
-export default CustomCardHeader;
+export default CustomCardFooter;
