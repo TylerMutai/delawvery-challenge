@@ -3,6 +3,7 @@ import {Flex} from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import {useLocation, useNavigate} from "react-router-dom";
 import frontendPaths from "../../utils/values/frontendPaths";
+import {fontSizeLarge, fontSizeNormal, transition} from "../../utils/values/theme";
 
 
 function NavbarItem({to, children}) {
@@ -28,21 +29,43 @@ function NavbarItem({to, children}) {
     navigate(to);
   }, [to, navigate]);
 
+
+  const parentStyles = {
+    alignItems: "center",
+    transition: transition,
+    flexDirection: "column",
+    justifyContent: "start",
+    role: "group",
+    cursor: "pointer",
+    onClick: handleNavigation,
+    color: "#BDBDBD",
+    gap: "8px",
+    fontSize: fontSizeNormal,
+    _hover: {
+      fontSize: fontSizeLarge
+    }
+  }
+  const indicatorStyles = {
+    w: "0",
+    h: "4px",
+    transition: transition,
+    _groupHover: {
+      width: "110%",
+    },
+    borderRadius: "4px",
+    background: "black"
+  }
+
+  if (isActive) {
+    parentStyles["color"] = "black";
+    parentStyles["fontSize"] = fontSizeLarge;
+    indicatorStyles["w"] = "50%";
+  }
+
   return (
-    <Flex alignItems={"center"}
-          flexDirection={"column"}
-          justifyContent={"start"}
-          role={"group"}
-          cursor={"pointer"}
-          onClick={handleNavigation}
-          gap={"8px"}>
+    <Flex {...parentStyles}>
       {children}
-      <Flex w={isActive ? "50%" : "0"} h={"4px"}
-            transition={"all ease-in-out .5s"}
-            _groupHover={{
-              width: "110%"
-            }}
-            borderRadius={"4px"} background={"black"}/>
+      <Flex {...indicatorStyles}/>
     </Flex>
   );
 }

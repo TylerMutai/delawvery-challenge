@@ -7,7 +7,7 @@ function CustomCard(props) {
       base: "100%",
       md: "70%",
       lg: "50%"
-    }}>
+    }} borderRadius={"14px"} boxShadow={"none"}>
       {props.children}
     </Card>
   );

@@ -1,23 +1,14 @@
 import React, {useCallback, useState} from 'react';
-import {
-  Button,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Stack,
-  StackDivider
-} from "@chakra-ui/react";
+import {Button, CardBody, Flex, FormControl, FormLabel, Heading, Icon, Input, Stack} from "@chakra-ui/react";
 import strings from "../utils/localization/main";
 import useNetworkRequest from "../utils/hooks/useNetworkRequest";
 import {signIn} from "../utils/services/authService";
 import {useNavigate} from "react-router-dom";
 import frontendPaths from "../utils/values/frontendPaths";
+import CustomCardHeader from "../components/CustomCardHeader";
 import CustomCard from "../components/CustomCard";
+import {RiShieldUserLine} from "react-icons/ri";
+import CustomCardFooter from "../components/CustomCardFooter";
 
 function LoginPage() {
   const [user, setUser] = useState({});
@@ -41,11 +32,12 @@ function LoginPage() {
     <Flex w={"100%"} minH={"100vh"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}>
       <CustomCard>
-        <CardHeader>
+        <CustomCardHeader>
+          <Icon as={RiShieldUserLine}/>
           <Heading size='md'>{strings.login}</Heading>
-        </CardHeader>
+        </CustomCardHeader>
         <CardBody>
-          <Stack divider={<StackDivider/>} spacing='4'>
+          <Stack spacing='6'>
             <FormControl>
               <FormLabel>{strings.email}</FormLabel>
               <Input type='email' name={"email"} value={user?.email || ""} onChange={handleChange} isRequired={true}/>
@@ -57,11 +49,11 @@ function LoginPage() {
             </FormControl>
           </Stack>
         </CardBody>
-        <CardFooter>
-          <Button colorScheme={"blue"} isLoading={isLoading} onClick={handleSubmit}>
+        <CustomCardFooter>
+          <Button isLoading={isLoading} onClick={handleSubmit}>
             {strings.login}
           </Button>
-        </CardFooter>
+        </CustomCardFooter>
       </CustomCard>
     </Flex>
   );

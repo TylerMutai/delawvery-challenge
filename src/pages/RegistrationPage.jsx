@@ -2,16 +2,14 @@ import React, {useCallback, useState} from 'react';
 import {
   Button,
   CardBody,
-  CardFooter,
-  CardHeader,
   Flex,
   FormControl,
   FormHelperText,
   FormLabel,
   Heading,
+  Icon,
   Input,
-  Stack,
-  StackDivider
+  Stack
 } from "@chakra-ui/react";
 import strings from "../utils/localization/main";
 import {useNavigate} from "react-router-dom";
@@ -20,6 +18,9 @@ import frontendPaths from "../utils/values/frontendPaths";
 import useNetworkRequest from "../utils/hooks/useNetworkRequest";
 import CustomCard from "../components/CustomCard";
 import Swal from "sweetalert2";
+import CustomCardHeader from "../components/CustomCardHeader";
+import {FiUserPlus} from "react-icons/fi";
+import CustomCardFooter from "../components/CustomCardFooter";
 
 function RegistrationPage() {
   const [user, setUser] = useState({});
@@ -53,14 +54,14 @@ function RegistrationPage() {
 
   return (
     <Flex w={"100%"} minH={"100vh"} flexDirection={"column"}
-          justifyContent={"center"} alignItems={"center"}
-          paddingX={"5rem"}>
+          justifyContent={"center"} alignItems={"center"}>
       <CustomCard>
-        <CardHeader>
+        <CustomCardHeader>
+          <Icon as={FiUserPlus}/>
           <Heading size='md'>{strings.register}</Heading>
-        </CardHeader>
+        </CustomCardHeader>
         <CardBody>
-          <Stack divider={<StackDivider/>} spacing='4'>
+          <Stack spacing='6'>
             <FormControl>
               <FormLabel>{strings.email}</FormLabel>
               <Input type='email' name={"email"} onChange={handleChange} isRequired={true}/>
@@ -76,11 +77,11 @@ function RegistrationPage() {
             </FormControl>
           </Stack>
         </CardBody>
-        <CardFooter>
-          <Button colorScheme={"blue"} isLoading={isLoading} onClick={_handleSubmit}>
+        <CustomCardFooter>
+          <Button isLoading={isLoading} onClick={_handleSubmit}>
             {strings.register}
           </Button>
-        </CardFooter>
+        </CustomCardFooter>
       </CustomCard>
     </Flex>
   );
