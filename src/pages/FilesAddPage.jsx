@@ -86,7 +86,7 @@ function FilesAddPage() {
     }
     setFile(file);
     setProcessingFile(false);
-  }, [getExtension])
+  }, [])
 
   const handlePagesChange = useCallback(e => {
     const val = parseInt(e.target.value);
