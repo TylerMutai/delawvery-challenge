@@ -19,14 +19,14 @@ const storagePath = "images";
  * @param user
  * @returns {string}
  */
-const getPath = user => `${entityName}/${user.uid}/doc`
+const getPath = user => user ? `${entityName}/${user.uid}/doc` : null
 
 /**
  *
  * @param user
  * @returns {string}
  */
-const getStoragePath = user => `${storagePath}/${user.uid}`
+const getStoragePath = user => user ? `${storagePath}/${user.uid}` : null
 
 /**
  *

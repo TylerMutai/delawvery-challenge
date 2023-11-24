@@ -10,7 +10,7 @@ import useLoggedInUser from "./useLoggedInUser";
 function useFilesList() {
   const [files, setFiles] = useState([]);
   const user = useLoggedInUser();
-  const handleListFiles = useCallback(() => listFileData(user), [user]);
+  const handleListFiles = useCallback(() => user ? listFileData(user) : null, [user]);
 
   const handleSuccess = useCallback((data) => {
     setFiles(data);
