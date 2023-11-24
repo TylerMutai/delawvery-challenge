@@ -24,9 +24,6 @@ export function RtlProvider({children}) {
   strings.setLanguage(getSelectedLanguage());
   const cache = createCache(options[dir])
   document.dir = dir;
-  console.log("cache: ", cache);
-  console.log("dir: ", dir);
-  console.log("options[dir]: ", options[dir]);
   return (
     <CacheProvider value={cache}>
       {children}
