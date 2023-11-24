@@ -1,5 +1,5 @@
 import {Flex} from "@chakra-ui/react";
-import NavBar from "./NavBar.jsx";
+import NavBar from "./Navbar/NavBar.jsx";
 import Footer from "./Footer";
 
 /**
