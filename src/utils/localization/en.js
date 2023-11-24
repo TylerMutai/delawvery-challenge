@@ -1,4 +1,5 @@
 const en = {
+  internal_error: "Internal error",
   english: "English",
   hebrew:"Hebrew",
   login: "Login",
@@ -36,7 +37,7 @@ const en = {
   no_files_found: "No files were found",
   "auth/configuration-not-found": "Authentication configuration has not been set for this app. Contact support",
   "auth/invalid-login-credentials": "Username or password provided was wrong. Please try again.",
-  "permission-denied": "You are not allowed to access this page. Login first."
+  "permission-denied": "You are not allowed to access this page. You do not have necessary permissions."
 
 }
 export default en;

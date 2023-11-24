@@ -11,20 +11,36 @@ const firestore = getFirestore(app);
 const storage = getStorage(app);
 const analytics = getAnalytics(app);
 
-const entityName = "userFiles";
+const entityName = "files";
+const storagePath = "images";
+
+/**
+ *
+ * @param user
+ * @returns {string}
+ */
+const getPath = user => `${entityName}/${user.uid}`
+
+/**
+ *
+ * @param user
+ * @returns {string}
+ */
+const getStoragePath = user => `${storagePath}/${user.uid}`
 
 /**
  *
  * @param {number} filePages
  * @param {File} file
+ * @param {User} user
  * @returns {Promise<any>}
  */
-const createFileData = async (filePages, file) => {
+const createFileData = async (filePages, file, user) => {
 
   // File upload
   try {
     const fileName = `${new Date().getTime()}-${file.name}`;
-    const storageRef = ref(storage, fileName);
+    const storageRef = ref(storage, `${getStoragePath(user)}/${fileName}`);
     await uploadBytes(storageRef, file);
     const data = {
       filePages: filePages,
@@ -33,13 +49,13 @@ const createFileData = async (filePages, file) => {
     };
 
     try {
-      const docRef = await addDoc(collection(firestore, entityName), data);
+      const docRef = await addDoc(collection(firestore, `${getPath(user)}/*`), data);
       Swal.fire({
         icon: "success",
         title: strings.success,
         text: strings.file_uploaded_success
       }).then();
-      logEvent(analytics, "file-uploaded-successfully");
+      logEvent(analytics, "file_uploaded_successfully", {...user, ...data});
       return {...data, id: docRef.id};
     } catch (e) {
       Swal.fire({
@@ -58,12 +74,12 @@ const createFileData = async (filePages, file) => {
 }
 
 /**
- *
+ * @param {User} user
  * @returns {Promise<any>}
  */
-const listFileData = async () => {
+const listFileData = async (user) => {
   try {
-    const docs = await getDocs(collection(firestore, entityName))
+    const docs = await getDocs(collection(firestore, `${getPath(user)}/*`))
     const data = [];
     docs.forEach(doc => {
       data.push({

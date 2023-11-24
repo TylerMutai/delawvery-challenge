@@ -1,4 +1,5 @@
 const he = {
+  internal_error: "שגיאה פנימית",
   english: "אנגלית",
   hebrew: "עברית",
   login: "התחברות",

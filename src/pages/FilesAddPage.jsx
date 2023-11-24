@@ -24,6 +24,7 @@ import Swal from "sweetalert2";
 import * as pdfjsLib from "pdfjs-dist";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
+import useLoggedInUser from "../utils/hooks/useLoggedInUser";
 
 // set up fake worker for the browser.
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
@@ -39,6 +40,7 @@ function FilesAddPage() {
   const [filePages, setFilePages] = useState();
   const navigate = useNavigate();
   const [processingFile, setProcessingFile] = useState(false);
+  const user = useLoggedInUser();
 
   const handleFileChange = useCallback(async e => {
     const file = e.target.files[0];
@@ -97,8 +99,8 @@ function FilesAddPage() {
   }, [])
 
   const handleFileUpload = useCallback(() => {
-    return createFileData(filePages, file);
-  }, [filePages, file])
+    return createFileData(filePages, file, user);
+  }, [filePages, file, user])
 
   const handleSuccess = useCallback(() => {
     navigate(frontendPaths.files);
@@ -119,7 +121,7 @@ function FilesAddPage() {
   }, [handleSubmit, file, filePages]);
 
   return (
-    <Flex w={"100%"} h={"100%"} flexDirection={"column"}
+    <Flex w={"100%"} minH={"100vh"} flexDirection={"column"}
           justifyContent={"center"} alignItems={"center"}>
       {processingFile ?
         <Flex w={"100%"} h={"100%"} gap={"30px"} alignItems={"center"} justifyContent={"center"}

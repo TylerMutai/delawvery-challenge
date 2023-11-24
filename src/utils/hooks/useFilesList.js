@@ -1,6 +1,7 @@
 import {useCallback, useEffect, useState} from 'react';
 import useNetworkRequest from "./useNetworkRequest.js";
 import {listFileData} from "../services/fileDataService";
+import useLoggedInUser from "./useLoggedInUser";
 
 /**
  *
@@ -8,7 +9,8 @@ import {listFileData} from "../services/fileDataService";
  */
 function useFilesList() {
   const [files, setFiles] = useState([]);
-  const handleListFiles = useCallback(() => listFileData(), []);
+  const user = useLoggedInUser();
+  const handleListFiles = useCallback(() => listFileData(user), [user]);
 
   const handleSuccess = useCallback((data) => {
     setFiles(data);

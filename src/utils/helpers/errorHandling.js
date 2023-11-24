@@ -6,7 +6,8 @@ import strings from "../localization/main";
  * @return {string}
  */
 function parseErrorResponse(error) {
-  return `<b>${error?.code || 0}</b><br/> ${strings[error?.code || ""] || error.message}`;
+  console.log(error);
+  return `<b>${error?.code || strings.internal_error}</b><br/> ${strings[error?.code || ""] || error.message}`;
 }
 
 export {parseErrorResponse}
