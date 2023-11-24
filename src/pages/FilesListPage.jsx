@@ -6,11 +6,11 @@ import FullPageLoader from "../components/FullPageLoader";
 import {useNavigate} from "react-router-dom";
 import frontendPaths from "../utils/values/frontendPaths";
 import {getExtension, getFileIcon} from "../utils/types/file";
+import DeleteFile from "../components/DeleteFile";
 import {FiDownload} from "react-icons/fi";
-import {FaRegTrashAlt} from "react-icons/fa";
 
 function FilesListPage() {
-  const [isLoading, files] = useFilesList();
+  const [isLoading, files, handleSubmit] = useFilesList();
   const navigate = useNavigate();
 
   const _handleSubmit = useCallback((file) => {
@@ -27,7 +27,7 @@ function FilesListPage() {
             {strings.upload_file}
           </Button>
         </> : null}
-        <Flex gap={"24px"} justifyContent={"space-between"} alignItems={"center"} flexWrap={"wrap"}>
+        <Flex gap={"24px"} justifyContent={"flex-start"} alignItems={"center"} flexWrap={"wrap"}>
           {
             files.map(f => (
               <Card key={f.id} w={"170px"} background={"white"} boxShadow={"none"}>
@@ -43,9 +43,7 @@ function FilesListPage() {
                       </Text>
                     </Box>
                     <Flex alignItems={"center"} justifyContent={"space-between"} gap={"8px"}>
-                      <Button size={"sm"} colorScheme={"red"} onClick={() => _handleSubmit(f)} fontSize={"sm"}>
-                        <Icon as={FaRegTrashAlt}/>
-                      </Button>
+                      <DeleteFile file={f} afterDelete={handleSubmit}/>
                       <Button size={"sm"} onClick={() => _handleSubmit(f)} fontSize={"sm"}>
                         <Icon as={FiDownload}/>
                       </Button>

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import {backgroundColor} from "../utils/values/theme";
 import {CardFooter} from "@chakra-ui/react";
 
@@ -12,8 +11,6 @@ function CustomCardFooter({children}) {
   );
 }
 
-CustomCardFooter.propTypes = {
-  children: PropTypes.element
-}
+CustomCardFooter.propTypes = {}
 
 export default CustomCardFooter;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import {CardHeader} from "@chakra-ui/react";
 import {backgroundColor, fontSizeExtraExtraLarge} from "../utils/values/theme";
 
@@ -13,8 +12,6 @@ function CustomCardHeader({children}) {
   );
 }
 
-CustomCardHeader.propTypes = {
-  children: PropTypes.element
-}
+CustomCardHeader.propTypes = {}
 
 export default CustomCardHeader;

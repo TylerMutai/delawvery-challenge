@@ -73,7 +73,6 @@ function NavbarItem({to, children}) {
 
 NavbarItem.propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired
 }
 
 export default NavbarItem;

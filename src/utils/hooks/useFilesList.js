@@ -21,7 +21,7 @@ function useFilesList() {
     handleSubmit().then();
   }, [handleSubmit])
 
-  return [isLoading, files];
+  return [isLoading, files, handleSubmit];
 }
 
 export default useFilesList;

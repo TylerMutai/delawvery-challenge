@@ -2,8 +2,8 @@ import {app} from "../helpers/firebase";
 import strings from "../localization/main";
 import Swal from "sweetalert2";
 import {parseErrorResponse} from "../helpers/errorHandling";
-import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {addDoc, collection, deleteDoc, doc, getDocs, getFirestore} from "firebase/firestore";
+import {deleteObject, getDownloadURL, getMetadata, getStorage, ref, uploadBytes} from "firebase/storage";
 import {getAnalytics, logEvent} from "firebase/analytics";
 
 
@@ -19,7 +19,7 @@ const storagePath = "images";
  * @param user
  * @returns {string}
  */
-const getPath = user => `${entityName}/${user.uid}`
+const getPath = user => `${entityName}/${user.uid}/doc`
 
 /**
  *
@@ -42,14 +42,17 @@ const createFileData = async (filePages, file, user) => {
     const fileName = `${new Date().getTime()}-${file.name}`;
     const storageRef = ref(storage, `${getStoragePath(user)}/${fileName}`);
     await uploadBytes(storageRef, file);
+
+    const metadata = await getMetadata(storageRef);
     const data = {
       filePages: filePages,
       fileName: file.name,
-      fileUrl: await getDownloadURL(storageRef)
+      fileUrl: await getDownloadURL(storageRef),
+      filePath: metadata.fullPath
     };
 
     try {
-      const docRef = await addDoc(collection(firestore, `${getPath(user)}/*`), data);
+      const docRef = await addDoc(collection(firestore, `${getPath(user)}`), data);
       Swal.fire({
         icon: "success",
         title: strings.success,
@@ -79,7 +82,7 @@ const createFileData = async (filePages, file, user) => {
  */
 const listFileData = async (user) => {
   try {
-    const docs = await getDocs(collection(firestore, `${getPath(user)}/*`))
+    const docs = await getDocs(collection(firestore, `${getPath(user)}`))
     const data = [];
     docs.forEach(doc => {
       data.push({
@@ -97,4 +100,42 @@ const listFileData = async (user) => {
   }
 }
 
-export {createFileData, listFileData};
+/**
+ *
+ * @param {File} file
+ * @param {User} user
+ * @returns {Promise<any>}
+ */
+const deleteFileData = async (file, user) => {
+
+  // File delete
+  try {
+    const storageRef = ref(storage, file.filePath);
+    await deleteObject(storageRef);
+
+    try {
+      await deleteDoc(doc(firestore, `${getPath(user)}/${file.id}`));
+      Swal.fire({
+        icon: "success",
+        title: strings.success,
+        text: strings.file_deleted_success
+      }).then();
+      logEvent(analytics, "file_deleted_successfully", {...user, ...file});
+      return true;
+    } catch (e) {
+      Swal.fire({
+        icon: "error",
+        title: strings.error,
+        text: parseErrorResponse(e)
+      }).then();
+    }
+  } catch (e) {
+    Swal.fire({
+      icon: "error",
+      title: strings.error,
+      html: parseErrorResponse(e)
+    }).then();
+  }
+}
+
+export {createFileData, listFileData, deleteFileData};
