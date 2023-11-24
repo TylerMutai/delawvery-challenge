@@ -13,12 +13,15 @@ function NavbarItem({to, children}) {
     if (to === frontendPaths.index) {
       if (location.pathname === to) {
         setIsActive(true);
+        return;
       }
     } else {
-      if (location.pathname.includes(to)) {
+      if (location.pathname === to) {
         setIsActive(true);
+        return;
       }
     }
+    setIsActive(false);
   }, [to, location])
 
   const handleNavigation = useCallback(() => {
