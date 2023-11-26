@@ -11,11 +11,21 @@ const NavBar = () => {
 
   return (
     <chakra.nav display={"flex"} flexDirection={"row"}
-                alignItems={"center"}
+                alignItems={{
+                  base: user?.uid ? "flex-start" : "center",
+                  md: "center"
+                }}
                 justifyContent={"space-between"} w={"100%"}
                 backgroundColor={"transparent"}
                 py={"20px"} px={"20px"}>
-      <Flex alignItems={"center"} w={"100%"} gap={"24px"}>
+      <Flex alignItems={{
+        base: user?.uid ? "flex-start" : "center",
+        md: "center"
+      }} w={"100%"} gap={"24px"}
+            flexDirection={{
+              base: user?.uid ? "column" : "row",
+              md: "row"
+            }}>
         {user?.uid ? <NavbarItem to={"/"}>{strings.home}</NavbarItem> : null}
         {!user?.uid ?
           <NavbarItem to={frontendPaths.login}>{strings.login}</NavbarItem> :
